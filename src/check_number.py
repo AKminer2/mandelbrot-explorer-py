@@ -13,3 +13,16 @@
 
     # You should have received a copy of the GNU General Public License
     # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+def check_number(n: complex, max_iter: int):
+    z = 0
+    for i in range(0, max_iter):
+        z = (z*z) + n
+        if abs(z.real) > 2 or abs(z.imag) > 2:
+            # // print(i / max_iter)
+            
+            return int(255 * (i / max_iter))
+    else:
+        return 255
+    
+# // check_number(-1, 1000)

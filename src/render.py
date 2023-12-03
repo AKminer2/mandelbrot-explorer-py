@@ -13,4 +13,36 @@
 
     # You should have received a copy of the GNU General Public License
     # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-    
+
+from PIL import Image, ImageDraw
+from check_number import check_number
+
+def render():
+    RESULUTION = 1000
+
+    mandelbrot_set = []
+    n = -2 + 2j
+    # n = -174666 + 0.525333j
+    for i in range(0, RESULUTION+1):
+        mandelbrot_set.append([])
+        for j in range(0, RESULUTION+1):
+            mandelbrot_set[i].append(check_number(n, 80))
+            n += 4 / RESULUTION
+        n -= 4 + (4 / RESULUTION)
+        n -= 4j / RESULUTION
+
+    print(mandelbrot_set)
+
+    image = Image.new('RGB', (RESULUTION, RESULUTION), (0, 0, 0))
+    draw = ImageDraw.Draw(image)
+
+    x = 0
+    y = 0
+    for i in mandelbrot_set:
+        for j in i:                          
+            draw.point([x, y], (j, j, j))
+            x += 1
+        y += 1
+        x = 0
+
+    image.save("mandelbrot_set.png", 'PNG')

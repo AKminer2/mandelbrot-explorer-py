@@ -20,9 +20,11 @@ from check_number import check_number
 def render():
     RESULUTION = 1000
 
+    # iterate through complex numbers from -2 + 2i to 2 + -2i
+    # and append to mandelbrot_set array
     mandelbrot_set = []
     n = -2 + 2j
-    # n = -174666 + 0.525333j
+    # // n = -174666 + 0.525333j
     for i in range(0, RESULUTION+1):
         mandelbrot_set.append([])
         for j in range(0, RESULUTION+1):
@@ -36,6 +38,7 @@ def render():
     image = Image.new('RGB', (RESULUTION, RESULUTION), (0, 0, 0))
     draw = ImageDraw.Draw(image)
 
+    # draw the mandebrot set from the mandelbrot_set array
     x = 0
     y = 0
     for i in mandelbrot_set:
